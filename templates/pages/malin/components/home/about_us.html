@@ -1,0 +1,69 @@
+<!-- Section Content -->
+<section id="about">
+    <div class="container-fluid px-0">
+
+        {% for about_us in about_us %}
+        <div class="row no-gutters">
+            <div class="col-lg-6 g-flex-centered g-bg-primary g-pa-40">
+                <div class="col-md-6 col-lg-3 g-mb-40 g-mb-0--lg">
+                    <span class="u-icon-v1 u-icon-size--3xl g-color-primary g-mb-15">
+                        <i class="icon-food-039 u-line-icon-pro"></i>
+                    </span>
+                    <h3 class="h6 text-uppercase g-font-weight-600 g-mb-25">
+                        <a class="g-color-black g-color-white--hover g-text-underline--none--hover"
+                            href="#">Catering</a>
+                    </h3>
+                    <p class="g-font-size-default mb-0">Nunc ligula nulla, efficitur et eros ut, vulputate gravida leo.
+                        Vestibulum ante ipsum primis in faucibus orci luctus et.</p>
+                </div>
+
+                <div class="col-md-6 col-lg-3 g-mb-40 g-mb-0--lg">
+                    <span class="u-icon-v1 u-icon-size--3xl g-color-white g-mb-15">
+                        <i class="icon-food-008 u-line-icon-pro"></i>
+                    </span>
+                    <h3 class="h6 text-uppercase g-font-weight-600 g-mb-25">
+                        <a class="g-color-black g-color-white--hover g-text-underline--none--hover" href="#">Wine
+                            collection</a>
+                    </h3>
+                    <p class="g-font-size-default mb-0">Nunc ligula nulla, efficitur et eros ut, vulputate gravida leo.
+                        Vestibulum ante ipsum primis in faucibus orci luctus et.</p>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Carousel v20 -->
+                <div class="js-carousel" data-infinite="true"
+                    data-arrows-classes="u-arrow-v1 g-pos-abs g-left-0 g-absolute-centered--y g-width-60 g-height-60 g-color-primary g-bg-white g-opacity-1 g-opacity-0_8--hover g-transition-0_2 g-transition--ease-in"
+                    data-arrow-left-classes="fa fa-chevron-left g-ml-15"
+                    data-arrow-right-classes="fa fa-chevron-right g-ml-75">
+                    {% if about_us.image1 %}
+                    <div class="js-slide g-bg-cover g-bg-black-opacity-0_3--after">
+                        <img class="w-100" src="{{ about_us.image1.url }}" alt="Image description">
+                    </div>
+                    {% endif %}
+                    {% if about_us.image2 %}
+                    <div class="js-slide g-bg-cover g-bg-black-opacity-0_3--after">
+                        <img class="w-100" src="{{ about_us.image2.url }}" alt="Image description">
+                    </div>
+                    {% endif %}
+                    {% if about_us.image3 %}
+                    <div class="js-slide g-bg-cover g-bg-black-opacity-0_3--after">
+                        <img class="w-100" src="{{ about_us.image3.url }}" alt="Image description">
+                    </div>
+                    {% endif %}
+                    {% if about_us.image4 %}
+                    <div class="js-slide g-bg-cover g-bg-black-opacity-0_3--after">
+                        <img class="w-100" src="{{ about_us.image4.url }}" alt="Image description">
+                    </div>
+                    {% endif %}
+
+
+                </div>
+                <!-- End Carousel v20 -->
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- End Section Content -->
