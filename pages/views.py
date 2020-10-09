@@ -141,16 +141,7 @@ def index(request):
     all_products = Product.objects.all()
     print('Dep ads prod image', product_image_dict)
     context = { 'object_list': paged_object_list,
-                'product_id_dict': product_id_dict,
-                'product_name_dict': product_name_dict,
-                'product_price_dict': product_price_dict,
-                'product_image_dict': product_image_dict,
-                'product_description_dict': product_description_dict,
-                'product_name_dict': product_name_dict,
-                'dept_id_dict':dept_id_dict,
-                'notices': notices,
-                'articles': articles,
-                'depts': depts,
+            
                 'about_us': about_us,
                 # 'product': product,
                 'sub_category': sub_category,
