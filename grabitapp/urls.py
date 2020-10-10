@@ -20,7 +20,7 @@ from django.conf.urls import url
 from django.urls import path
 from django.conf.urls import include
 from django.conf import settings
-from ecommerce_app.views import index
+from pages.views import index
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from django.views.generic import TemplateView
