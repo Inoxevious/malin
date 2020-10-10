@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'jet',
     'vote',
     'mapwidgets',
+    'sorl.thumbnail', # required for thumbnail support
+    'django_instagram',
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',

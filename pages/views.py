@@ -113,14 +113,14 @@ def index(request):
     #                 dcost = 'Risk not added yet'
     
     sub_category = SubCategory.objects.all()
-    for sub_category in sub_category:
-        try:
-            product  = Product.objects.get(sub_category_id = sub_category.id)
-            dept_id_dict[sub_category.id] = []
-            dept_id_dict[department_ads.id].append(str(department_ads.dep.id))   
+    # for sub_category in sub_category:
+    #     try:
+    #         product  = Product.objects.get(sub_category_id = sub_category.id)
+    #         dept_id_dict[sub_category.id] = []
+    #         dept_id_dict[department_ads.id].append(str(department_ads.dep.id))   
 
-        except (TypeError, ValueError, OverflowError, Product.DoesNotExist):
-                    dcost = 'Risk not added yet'
+    #     except (TypeError, ValueError, OverflowError, Product.DoesNotExist):
+    #                 dcost = 'Risk not added yet'
     department_ads = DepartmentAdverts.objects.all()
     about_us = About_us.objects.all()
     print('about us', about_us)
@@ -139,7 +139,7 @@ def index(request):
     # size1_ankara_senator_wear = Product.objects.filter(size1_model_image = 1)
     depts = Department.objects.all()  
     all_products = Product.objects.all()
-    print('Dep ads prod image', product_image_dict)
+    print('ARTICLESSSS image', articles)
     context = { 'object_list': paged_object_list,
             
                 'about_us': about_us,
@@ -154,6 +154,7 @@ def index(request):
                 'hunters': hunters,
                 'all_products': all_products,
                 'on_sale': on_sale,
+                'articles': articles,
                 'open_show': open_show,
                 'department_ads': department_ads,
     

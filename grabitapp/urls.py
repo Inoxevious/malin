@@ -23,6 +23,7 @@ from django.conf import settings
 from ecommerce_app.views import index
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
+from django.views.generic import TemplateView
 router = DefaultRouter()
 urlpatterns = [
     path('', index, name='index'),
@@ -35,6 +36,10 @@ urlpatterns = [
     path('o/', include('oauth2_provider.urls')),
     path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
-     path('paypal/', include('paypal.standard.ipn.urls')),
+    path('paypal/', include('paypal.standard.ipn.urls')),
+    path('', TemplateView.as_view(template_name='index.html', extra_context={
+        "instagram_profile_name": "malin_collection"
+    })),
+    
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
