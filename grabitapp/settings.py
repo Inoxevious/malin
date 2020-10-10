@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'mush_store',
     'pages',
     'cart',
+    'jet',
     'vote',
     'mapwidgets',
     'corsheaders',
