@@ -112,7 +112,7 @@ TEMPLATES = [
 ]
 CART_SESSION_ID = 'cart'
 WSGI_APPLICATION = 'grabitapp.wsgi.application'
-
+FILE_UPLOAD_PERMISSIONS=0o640
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
