@@ -46,6 +46,9 @@ def show_product(request, product_id, product_slug):
 
     if request.method == 'POST':
         form = CartForm(request, request.POST)
+        print(form)
+
+        
         if form.is_valid():
             request.form_data = form.cleaned_data
             cart.add_item_to_cart(request)
@@ -70,9 +73,10 @@ def show_cart(request):
     cart_items = cart.get_all_cart_items(request)
     print('FOUND CART ITEMS', cart_items)
     cart_subtotal = cart.subtotal(request)
-    
+
     return render(request, 'pages/fashe/components/cart/cart_detail.html', {
                                             'cart_items': cart_items,
+                                   
                                             'cart_subtotal': cart_subtotal,
                                             })
 
