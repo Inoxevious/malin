@@ -51,6 +51,7 @@ ALLOWED_HOSTS = ['malincollection.co.zw','127.0.0.1', '104.243.37.215']
 INSTALLED_APPS = [
     'account',
     'easy_maps',
+    'widget_tweaks',
     'mush_store',
     'pages',
     'cart',

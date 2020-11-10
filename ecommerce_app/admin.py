@@ -10,6 +10,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'email', 'date', 'paid']
+    list_filter = ('id','requested','paid' )
 
 
 class OrderItemAdmin(admin.ModelAdmin):

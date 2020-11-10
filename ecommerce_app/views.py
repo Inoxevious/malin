@@ -63,6 +63,7 @@ def show_product(request, product_id, product_slug):
 
 
 def show_cart(request):
+    shipping_cost = 0
 
     if request.method == 'POST':
         if request.POST.get('submit') == 'Update':
@@ -73,28 +74,52 @@ def show_cart(request):
     cart_items = cart.get_all_cart_items(request)
     print('FOUND CART ITEMS', cart_items)
     cart_subtotal = cart.subtotal(request)
+    if request.method == 'POST':
+        try:
+            shipping_cost = request.POST['city']
+            request.session['shipping_cost'] = shipping_cost
+        except MultiValueDictKeyError:
+            shipping_cost = 0
+
+    
+    total = cart_subtotal + Decimal(shipping_cost)
 
     return render(request, 'pages/fashe/components/cart/cart_detail.html', {
                                             'cart_items': cart_items,
-                                   
                                             'cart_subtotal': cart_subtotal,
+                                            'total':total,
                                             })
 
 
 def checkout(request):
+    print('GOOD MORNING')
     if request.method == 'POST':
+        print('GOOD MORNING')
         form = CheckoutForm(request.POST)
+        print('FORM DATAA',form)
         if form.is_valid():
+            print('GOOD MORNING VL')
             cleaned_data = form.cleaned_data
+            uname = cleaned_data.get('name')
+            print('username',uname)
+            shipping_cost = request.session['shipping_cost']
+
             o = Order(
                 name = cleaned_data.get('name'),
                 email = cleaned_data.get('email'),
-                postal_code = cleaned_data.get('postal_code'),
                 address = cleaned_data.get('address'),
+                phone = cleaned_data.get('phone'),
+                city = cleaned_data.get('city'),
+                shippig_cost = shipping_cost,
             )
             o.save()
 
             all_items = cart.get_all_cart_items(request)
+            cart_subtotal = cart.subtotal(request)
+            shipping_cost = request.session['shipping_cost']
+            total = cart_subtotal + Decimal(shipping_cost)
+            print('oRDER TOTAL', total)
+            request.session['order_total'] = str(total)
             for cart_item in all_items:
                 li = LineItem(
                     product_id = cart_item.product_id,
@@ -112,12 +137,59 @@ def checkout(request):
 
             messages.add_message(request, messages.INFO, 'Order Placed!')
             return redirect('ecommerce_app:checkout')
+        else:
+            cart_items = cart.get_all_cart_items(request)
+            print('FOUND CHECKOUT CART INV ITEMS', cart_items)
+            cart_subtotal = cart.subtotal(request)
+            shipping_cost = request.session['shipping_cost']
+
+
+        
+            total = cart_subtotal + Decimal(shipping_cost)
+
+            return render(request, 'pages/fashe/components/cart/checkout.html', {
+                'form': form,
+                'cart_items': cart_items,
+                'cart_subtotal': cart_subtotal,
+                'total':total,
+                })
 
 
     else:
         form = CheckoutForm()
-        return render(request, 'ecommerce_app/checkout.html', {'form': form})
+        cart_items = cart.get_all_cart_items(request)
+        print('FOUND CHECKOUT CART ITEMS', cart_items)
+        cart_subtotal = cart.subtotal(request)
+        shipping_cost = request.session['shipping_cost']
 
+        total = cart_subtotal + Decimal(shipping_cost)
+        
+        return render(request, 'pages/fashe/components/cart/checkout.html', {
+            'form': form,
+            'cart_items': cart_items,
+            'cart_subtotal': cart_subtotal,
+            'total':total,
+            })
+
+
+
+def request_to_order(request):
+    order_id = request.session.get('order_id')
+    order = get_object_or_404(Order, id=order_id)
+    order.requested = True
+    order.save()
+    
+    form = CheckoutForm()
+    cart_items = cart.get_all_cart_items(request)
+
+
+    total = request.session['order_total']
+    messages.add_message(request, messages.INFO, 'Order number: {} for {}  of ${} is Successfully  Placed!'.format(order.id, order.name, total))
+    return render(request, 'pages/fashe/components/cart/checkout.html', {
+        'form': form,
+        'cart_items': cart_items,
+        'total':total,
+        })
 
 @csrf_exempt
 def payment_done(request):

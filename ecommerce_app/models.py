@@ -98,16 +98,21 @@ class CartItem(models.Model):
 class Order(models.Model):
     name = models.CharField(max_length=191)
     email = models.EmailField()
-    postal_code = models.IntegerField()
+    phone = models.CharField(max_length=191,null=True ,blank=True)
+    city = models.CharField(max_length=191, null=True ,blank=True)
     address = models.CharField(max_length=191)
     date = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
+    requested = models.BooleanField(default=False)
+    shippig_cost = models.CharField(max_length=191, null=True ,blank=True)
 
     def __str__(self):
         return "{}:{}".format(self.id, self.email)
 
     def total_cost(self):
-        return Decimal(sum([ li.cost() for li in self.lineitem_set.all() ] ))
+        cart_cost = Decimal(sum([ li.cost() for li in self.lineitem_set.all() ] ))
+        shipping_cost = Decimal(self.shippig_cost)
+        return shipping_cost + cart_cost 
 
     # def get_total_cost(self):
     #     return Decimal(sum(item.get_cost() for item in self.items.all()))
