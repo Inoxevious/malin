@@ -11,25 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-POSTGRESQL_ADDON_URI="postgresql://ugyucpxiheophshfdyke:DZ4Xom3zZ0SoeK6cLAzv@bvsfwrtlpqtm6oox1xq5-postgresql.services.clever-cloud.com:5432/bvsfwrtlpqtm6oox1xq5"
-POSTGRESQL_ADDON_PORT=5432
-POSTGRESQL_ADDON_HOST="bvsfwrtlpqtm6oox1xq5-postgresql.services.clever-cloud.com"
-POSTGRESQL_ADDON_DB="bvsfwrtlpqtm6oox1xq5"
-POSTGRESQL_ADDON_PASSWORD="DZ4Xom3zZ0SoeK6cLAzv"
-APP_HOME="/home/greats/grabit/Backend/bikebackend/"
-STATIC_URL_PREFIX="/static"
-POSTGRESQL_ADDON_USER="ugyucpxiheophshfdyke"
-STATIC_URL_PREFIX  = STATIC_URL_PREFIX
-MEDIA_ROOT=APP_HOME + STATIC_URL_PREFIX + '/storage/'
-MEDIA_URL = "/media/"
-STATIC_ROOT = APP_HOME + STATIC_URL_PREFIX + '/static/static/' 
 
-# AWS CREDENTIALS
-AWS_RDS_USERNAME='postgres'
-AWS_RDS_PASSWORD='malindata'
-SOURVE='209.88.93.187/32'
-AWS_RDS_ENDPOINT= 'malin.c9bwramxwsbn.eu-west-2.rds.amazonaws.com'
-AWS_RDS_DBNAME='malindb'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,7 +25,7 @@ SECRET_KEY = ')c^@^^mf^uc5&8!$zdvf2dlw!@-e52&wnuk^2o@&+2e*xx#8rj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['malincollection.co.zw','127.0.0.1', '104.243.37.215']
+ALLOWED_HOSTS = ['malinafrocouture.com','127.0.0.1', '104.243.37.215']
 
 
 # Application definition
@@ -56,14 +38,11 @@ INSTALLED_APPS = [
     'pages',
     'cart',
     'jet',
-    'vote',
-    'mapwidgets',
     'sorl.thumbnail', # required for thumbnail support
     'django_instagram',
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_gis',
     'oauth2_provider',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -74,7 +53,6 @@ INSTALLED_APPS = [
     'searchableselect',
     'crispy_forms',
     'mathfilters',
-    'django.contrib.gis',
     'django.contrib.postgres.search',
     'paypal.standard.ipn', 
     'ecommerce_app',
@@ -118,27 +96,21 @@ FILE_UPLOAD_PERMISSIONS=0o640
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# 
-# DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.contrib.gis.db.backends.postgis', #''django.db.backends.postgresql_psycopg2',  #'django.db.backends.mysql',
-#             'NAME': POSTGRESQL_ADDON_DB,
-#             'USER': POSTGRESQL_ADDON_USER,
-#             'PASSWORD': POSTGRESQL_ADDON_PASSWORD,
-#             'HOST': POSTGRESQL_ADDON_HOST,
-#             'PORT': POSTGRESQL_ADDON_PORT,
-#             'CONN_MAX_AGE': 5, 
-#         }
-#     }
+# AWS CREDENTIALS
+AWS_RDS_USERNAME='postgres'
+AWS_RDS_PASSWORD='Tapuwa1234'
+SOURVE='209.88.93.187/32'
+AWS_RDS_ENDPOINT= 'malinafrodb.c9bwramxwsbn.eu-west-2.rds.amazonaws.com'
+AWS_RDS_DBNAME='malinafrodb'
 
 DATABASES = {
         'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgis', #''django.db.backends.postgresql_psycopg2',  #'django.db.backends.mysql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', #''django.db.backends.postgresql_psycopg2',  #'django.db.backends.mysql',
             'NAME': AWS_RDS_DBNAME,
             'USER': AWS_RDS_USERNAME,
             'PASSWORD': AWS_RDS_PASSWORD,
             'HOST': AWS_RDS_ENDPOINT,
-            'PORT': POSTGRESQL_ADDON_PORT,
+            'PORT': 5432,
             'CONN_MAX_AGE': 15, 
         }
     }

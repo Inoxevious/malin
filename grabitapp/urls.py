@@ -29,10 +29,8 @@ urlpatterns = [
     path('', index, name='index'),
     path('pages/', include('pages.urls')),
     path('account/', include('account.urls')),
-    path('individual/', include('individual.urls')),
     path('ecommerce_app/', include('ecommerce_app.urls')),
     path('mush_store/', include('mush_store.urls')),
-    path('search/', include('search.urls')),
     path('o/', include('oauth2_provider.urls')),
     path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),

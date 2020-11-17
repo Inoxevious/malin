@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.gis.db import models
-from django.contrib.gis.geos import Point
+
 
 class UserClass(models.Model): 
     name = models.CharField(max_length=70)
@@ -19,14 +18,6 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
-class Country(models.Model): 
-    name = models.CharField(max_length=200, default='zim')
-    official_language = models.TextField(null=True ,blank=True)
-    flag = models.ImageField(null=True ,blank=True, upload_to='media/images/countries/flags')
-    location = models.PointField(null=True, blank=True)
-
-    def __str__(self):
-        return self.name
 
 # Create your models here.
 class AccountUser(models.Model):
@@ -46,7 +37,6 @@ class AccountUser(models.Model):
     total_worth =models.IntegerField(null=True ,blank=True)
     profile_pic = models.ImageField(upload_to="media/%Y/%m/%d",null=True, blank=True)
     bio = models.TextField(null=True ,blank=True)
-    country =  models.ForeignKey(Country, on_delete = models.CASCADE,null=True ,blank=True)
     
 
     def __str__(self):
