@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'pages',
     'cart',
     'jet',
-    'sort.thumbnail', # required for thumbnail support
     'django_instagram',
     'corsheaders',
     'rest_framework',
