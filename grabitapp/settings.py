@@ -104,7 +104,7 @@ AWS_RDS_DBNAME='malinafrodb'
 
 DATABASES = {
         'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgresql', #''django.db.backends.postgresql_psycopg2',  #'django.db.backends.mysql',
+            'ENGINE': 'django.db.backends.postgresql', #''django.db.backends.postgresql_psycopg2',  #'django.db.backends.mysql',
             'NAME': AWS_RDS_DBNAME,
             'USER': AWS_RDS_USERNAME,
             'PASSWORD': AWS_RDS_PASSWORD,
